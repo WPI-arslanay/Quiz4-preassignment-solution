@@ -1,0 +1,34 @@
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <title>Flask Example</title>
+</head>
+
+<h1>Hello, "{{current_course.major}} {{current_course.coursenum}} - {{current_course.title}} " class!</h1>
+
+<h2>TAs:</h2>
+    <ol>
+      {% for ta in current_course.all_tas() %}
+        <li>
+            {{ta.ta_name}} -  {{ta.ta_email}} 
+        </li>
+      {% endfor %}
+    </ol>
+
+<h2>Add New TA:</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <table>
+      <tr> <td>{{ form.ta_name.label(class = "formlabels")}} </td>
+      <td class='tcolumn'> {{ form.ta_name(class='forminput')}} </td>
+      </tr>
+      <tr><td>{{ form.ta_email.label(class="formlabels")}} </td>
+        <td class='tcolumn'> {{ form.ta_email(class='forminput')}} </td>
+      </tr>
+      </table>
+    <p>{{ form.submit(class='button')}}</p>
+    </form>
+
+
+
+<p>Click <a href=" {{url_for('app.index')}}"> here </a> to return back to main page!</p> 
+

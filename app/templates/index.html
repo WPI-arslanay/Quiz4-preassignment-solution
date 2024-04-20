@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Flask Example</title>
+  </head>
+  <h1> Hello!</h1>
+  <body>
+    <h2>Current Courses:</h2>
+    <ul>
+      {% for course in courses %}
+        <li> <a href="{{url_for('app.course', courseid = course.id) }}" > 
+                   {{ course.major}}{{course.coursenum}}-{{course.title}}  </a> in {{course.classroom.building}}-{{course.classroom.roomNumber}}</li>
+      {% endfor %}
+    </ul>
+    <h2>Add New Course:</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <table>
+      <tr> <td>{{ form.major.label(class='formlabels')}} </td>
+           <td class='tcolumn'> {{ form.major(class='forminput')}} </td>
+      </tr>
+      <tr> <td>{{ form.coursenum.label(class='formlabels')}} </td>
+        <td class='tcolumn'> {{ form.coursenum(class='forminput')}} </td>
+      </tr>
+      <tr> <td>{{ form.title.label(class='formlabels')}} </td>
+        <td class='tcolumn'> {{ form.title(class='forminput')}} </td>
+      </tr>
+     <tr> <td>{{ form.classroom.label(class='formlabels')}} </td>
+      <td class='tcolumn'> {{ form.classroom(class='forminput')}} </td>
+    </tr>
+    </table>
+    <p>{{ form.submit(class='button')}}</p>
+    </form>
+
+  </body>
+</html>
